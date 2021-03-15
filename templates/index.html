@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="jumbotron">
+                <h1 class="display">GF Shop</h1>
+                <p class="lead">Best shop of modern video cards for PC</p>
+                <hr class="my-4">
+                <p>Opening soon...</p>
+                <a class="btn btn-outline-secondary btn-lg" href="/about">Learn more</a>
+            </div>
+        </div>
+        <div class="col-4">
+            <h2 class="display-4">Best prices</h2>
+            <p>Only recommended retail prices<sup>1 2</sup></p>
+            <p class="text-muted"><sup>1</sup>In some regions taxes can be applied<br><sup>2</sup>Delivery fee not included</p>
+        </div>
+        <div class="col-4">
+            <h1 class="display-4">Fast delivery</h1>
+            <p>One-day delivery for US, UK<br>Week delivery for other countries</p>
+        </div>
+        <div class="col-4">
+            <h1 class="display-4">Frequent restock</h1>
+            <p>We always have our cards in stock, so you always can order and receive them without delay</p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="margin: 2rem 0">
+            <h1 class="display-2" style="margin-top: 1rem">Catalog</h1>
+            <hr class="my-1">
+        </div>
+        {% for i in items %}
+            <div class="col-4">
+                <div class="card text-center">
+                    <img src="{{ url_for('static', filename=i.preview) }}" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ i.name }}</h5>
+                        <p class="card-text">{{ i.description.split('.')[0] }}</p>
+                        {% if i.stock %}
+                            <a href="{{ i.link }}" class="btn btn-outline-primary stretched-link">Open</a>
+                        {% endif %}
+                    </div>
+                    {% if not i.stock %}
+                        <div class="card-footer text-muted">
+                            Out of Stock
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
