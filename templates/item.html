@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}{{ items[idx].name }}{% endblock %}
+{% block content %}
+    <div class="container">
+        <img src="{{ url_for('static', filename=items[idx].picture) }}" alt="Card picture" class="img-fluid rounded-pill" style="margin: 2rem 0">
+        <div class="row">
+            <div class="col-12" style="margin: 1rem 0"><h1 class="display-1 text-center">{{ items[idx].name }}</h1></div>
+            <div class="col-8" style="padding: 1rem">
+                <p>{{ items[idx].description }}</p>
+                <p class="display-6">Staring at {{ items[idx].price|safe }}</p>
+                <a href="{{ items[idx].buy }}" class="btn btn-outline-success btn-lg">Buy</a>
+            </div>
+            <div class="col-4">
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        {% for i in items[idx].specs %}
+                            <tr>
+                                <th>{{ i[0] }}</th>
+                                <td>{{ i[1] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>$(document).ready(function() {
+        $('#carouselImages').carousel({
+            interval: 2000,
+        });
+    })</script>
+{% endblock %}
